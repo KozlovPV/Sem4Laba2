@@ -1,10 +1,9 @@
+import java.util.Objects;
+
 public class Point3d {
     private double xCoord;
     private double yCoord;
     private double zCoord;
-    Point3d myPoint = new Point3d();
-    Point3d myOtherPoint1 = new Point3d(5, 3,8);
-    Point3d myOtherPoint2 = new Point3d(5, 3,8);
     public Point3d(double x, double y, double z) {
         xCoord = x;
         yCoord = y;
@@ -38,4 +37,22 @@ public class Point3d {
     public void setZ(double val) {
         zCoord = val;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Point3d point3d = (Point3d) o;
+        return Double.compare(point3d.xCoord, xCoord) == 0 && Double.compare(point3d.yCoord, yCoord) == 0 && Double.compare(point3d.zCoord, zCoord) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(xCoord, yCoord, zCoord);
+    }
+
+    public double distanceTo(Point3d point){
+        return Math.sqrt(Math.pow(this.getX()-point.getX(),2)+Math.pow(this.getY()-point.getY(),2)+Math.pow(this.getZ()-point.getZ(),2));
+    }
+
 }
